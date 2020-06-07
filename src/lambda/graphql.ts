@@ -1,20 +1,29 @@
-import { getBooks } from "./resolvers/books";
+import { searchBooks } from "./resolvers/books";
 
 const { ApolloServer, gql } = require("apollo-server-lambda");
 
 const typeDefs = gql`
+  type SearchBooksOutput {
+    totalPages: Int!
+    books: [Book!]!
+  }
   type Book {
     title: String!
+    author: Author!
+  }
+
+  type Author {
+    name: String!
   }
 
   type Query {
-    books: [Book!]!
+    searchBooks(query: String!, page: Int!): SearchBooksOutput!
   }
 `;
 
 const resolvers = {
   Query: {
-    books: () => getBooks(),
+    searchBooks: (_, { query, page }) => searchBooks(query, page),
   },
 };
 
