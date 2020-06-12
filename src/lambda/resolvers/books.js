@@ -1,6 +1,8 @@
 import Goodreads from "goodreads-api";
 
-const api = new Goodreads({ developerKey: process.env.GOODREADS_API_KEY });
+const api = new Goodreads({
+  developerKey: process.env.GOODREADS_API_KEY,
+});
 
 export const searchBooks = async (query, page) => {
   try {

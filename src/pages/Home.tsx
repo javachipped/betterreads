@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useLazyQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
-
-import { SearchBox } from "../components";
+import { Stack, Text } from "@chakra-ui/core";
+import { SearchBox, BookItem } from "../components";
 
 const SEARCH_BOOKS = gql`
   query searchBooks($query: String!, $page: Int!) {
@@ -22,6 +22,11 @@ export const Home = () => {
   const [loadSearchBooks, { loading, error, called, data }] = useLazyQuery(
     SEARCH_BOOKS
   );
+
+  useEffect(() => {
+    loadSearchBooks({ variables: { query: "programming", page: 1 } });
+  }, [loadSearchBooks]);
+
   if (called && loading) return <p>Loading ...</p>;
   if (error) return <p>Error :(</p>;
 
@@ -30,15 +35,15 @@ export const Home = () => {
       <SearchBox
         onSubmit={(query) => loadSearchBooks({ variables: { query, page: 1 } })}
       />
-      {data && <p>Total Pages: {data.searchBooks.totalPages}</p>}
-      {data &&
-        data.searchBooks.books.map(({ title, author: { name } }: any) => (
-          <div key={title}>
-            <p>
-              {title} - {name}
-            </p>
-          </div>
-        ))}
+      {data && (
+        <Stack spacing={10} mx={4}>
+          <Text>Total Pages: {data.searchBooks.totalPages}</Text>
+          {data &&
+            data.searchBooks.books.map((book: any) => (
+              <BookItem key={book.title} book={book} />
+            ))}
+        </Stack>
+      )}
     </>
   );
 };
