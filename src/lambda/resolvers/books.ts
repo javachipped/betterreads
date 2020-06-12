@@ -4,7 +4,7 @@ const api = new Goodreads({
   developerKey: process.env.GOODREADS_API_KEY,
 });
 
-export const searchBooks = async (query, page) => {
+export const searchBooks = async (query: string, page: number) => {
   try {
     const { totalPages, books } = await api.searchBooks({
       query,

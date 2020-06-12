@@ -1,6 +1,0 @@
-{
-  "watch": ["src", "../goodreads-api/dist"],
-  "ignore": ["src/**/*.spec.ts", "node_modules"],
-  "exec": "yarn start:lambda",
-  "ext": "js,json,ts"
-}

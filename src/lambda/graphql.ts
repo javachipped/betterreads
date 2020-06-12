@@ -1,6 +1,6 @@
-import { searchBooks } from "./resolvers/books";
+import { ApolloServer, gql } from "apollo-server-lambda";
 
-const { ApolloServer, gql } = require("apollo-server-lambda");
+import { searchBooks } from "./resolvers/books";
 
 const typeDefs = gql`
   type SearchBooksOutput {
@@ -23,7 +23,7 @@ const typeDefs = gql`
 
 const resolvers = {
   Query: {
-    searchBooks: (_, { query, page }) => searchBooks(query, page),
+    searchBooks: (_: any, { query, page }: any) => searchBooks(query, page),
   },
 };
 

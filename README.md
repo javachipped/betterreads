@@ -1,6 +1,17 @@
-# FoodBuddy
+# BetterReads
 
-FoodBuddy helps you compare all online food delivery options.
+## Problem
 
-## Technical Details
-This is a fork of https://github.com/netlify/create-react-app-lambda that uses Typescript both on the clientside and on the lambdas. Learn how to set this up yourself in a video: https://www.youtube.com/watch?v=3ldSM98nCHI.
+Goodreads UI is bad.
+
+## Solution
+
+Use Goodreads official API and develop a better UI.
+
+## How to run
+
+### Prerequisites
+
+- You should have the latest Netlify CLI version. Run `npm install -g netlify-cli` to be sure.
+- You should be logged in on Netlify CLI
+- Your project should be linked to a siteID on Netlify (using `netlify init` or `netlify link`). You can confirm this has been done if you have a .netlify folder with a state.json file containing your siteID.

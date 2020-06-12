@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useLazyQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 import { Stack, Text } from "@chakra-ui/core";
+
 import { SearchBox, BookItem } from "../components";
 
 const SEARCH_BOOKS = gql`
@@ -22,10 +23,6 @@ export const Home = () => {
   const [loadSearchBooks, { loading, error, called, data }] = useLazyQuery(
     SEARCH_BOOKS
   );
-
-  useEffect(() => {
-    loadSearchBooks({ variables: { query: "programming", page: 1 } });
-  }, [loadSearchBooks]);
 
   if (called && loading) return <p>Loading ...</p>;
   if (error) return <p>Error :(</p>;
