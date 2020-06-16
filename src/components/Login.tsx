@@ -5,13 +5,12 @@ import { gql } from "apollo-boost";
 const LOGIN = gql`
   query login {
     login {
-      token
-      secret
+      requestToken
+      requestTokenSecret
+      loginURL
     }
   }
 `;
-
-const GOODREADS_AUTHORIZE_URL = `https://www.goodreads.com/oauth/authorize?oauth_token=:token&oauth_callback=https://localhost:8888/oauth/callback`;
 
 export const Login = () => {
   const { loading, error, data } = useQuery(LOGIN);
@@ -19,12 +18,11 @@ export const Login = () => {
   if (loading) return <p>Loading ...</p>;
   if (error) return <p>Error :(</p>;
 
-  const { token, secret } = data.login;
+  const { requestToken, requestTokenSecret, loginURL } = data.login;
+  localStorage.setItem("requestToken", requestToken);
+  localStorage.setItem("requestTokenSecret", requestTokenSecret);
 
-  window.location.href = GOODREADS_AUTHORIZE_URL.replace(
-    ":token",
-    token
-  ).replace(":secret", secret);
+  window.location.href = loginURL;
 
   return <div />;
 };
