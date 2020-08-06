@@ -2,14 +2,7 @@ import React from "react";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import {
-  ThemeProvider,
-  CSSReset,
-  Heading,
-  Flex,
-  Link,
-  Text,
-} from "@chakra-ui/core";
+import { ThemeProvider, CSSReset, Heading, Flex, Link } from "@chakra-ui/core";
 
 import { Home } from "./pages/Home";
 import { Callback } from "./pages/Callback";
